@@ -1,6 +1,7 @@
 package com.example.ilijaangeleski.logn;
 
-import static com.example.ilijaangeleski.logn.MainPresenter.getUsers;
+
+import java.util.List;
 
 /**
  * Created by Ilija Angeleski on 11/15/2017.
@@ -8,8 +9,10 @@ import static com.example.ilijaangeleski.logn.MainPresenter.getUsers;
 
 public class LoginManager {
 
-    public boolean checkUserExist(String email, String password) {
-        for (User user : getUsers()) {
+    public LoginManager() {}
+
+    public boolean checkUserExist(String email, String password, List<User> users) {
+        for (User user : users) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                 return true;
             }
@@ -17,4 +20,11 @@ public class LoginManager {
         return false;
     }
 
+    public boolean userIsAuthoraized(String email, String password, List<User> users) {
+        return users.contains(new User(email, password));
+    }
+
+    public boolean checkIfFieldsAreEmpty(String email,String password){
+        return email!= null && !email.equals("")  && password!=null && !password.equals("");
+    }
 }

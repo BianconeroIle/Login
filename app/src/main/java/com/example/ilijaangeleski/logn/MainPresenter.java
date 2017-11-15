@@ -15,9 +15,9 @@ public class MainPresenter {
     MainView view;
     public static final List<User> users = new ArrayList<>();
 
-    public MainPresenter(MainView view){
+    public MainPresenter(MainView view) {
         loginManager = new LoginManager();
-        this.view=view;
+        this.view = view;
     }
 
     static {
@@ -26,20 +26,15 @@ public class MainPresenter {
         users.add(new User("vlade@gmail.com", "vlade"));
         users.add(new User("pece@gmail.com", "pece"));
     }
-    public void validateUser(String email,String password){
-        if(loginManager.checkUserExist(email, password)){
-            Log.d("validateUser","Super");
-        }else{
+
+    public void onLogin(String email, String password) {
+        if (!loginManager.checkIfFieldsAreEmpty(email, password)) {
+            view.showEmptyFieldsError();
+        } else if (loginManager.userIsAuthoraized(email, password, users)) {
+            view.onSuccessLogin(new User(email, password));
+        }else {
             view.showInvalidUser();
         }
-    }
 
-    public void checkIfFieldsAreEmpty(String email,String password){
-        if(email.equals("") || password.equals(""));
     }
-    public static List<User> getUsers() {
-        return users;
-    }
-
-
 }

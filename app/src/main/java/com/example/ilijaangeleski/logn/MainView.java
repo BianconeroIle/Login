@@ -6,4 +6,6 @@ package com.example.ilijaangeleski.logn;
 
 public interface MainView {
     void showInvalidUser();
+    void showEmptyFieldsError();
+    void onSuccessLogin(User user);
 }
